@@ -1,0 +1,5 @@
+= Golang TIL
+
+== 参考サイト
+
+* https://go-tour-jp.appspot.com/list[Tour of Go]
