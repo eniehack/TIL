@@ -1,0 +1,102 @@
+= CORS
+
+== CORSとは
+
+* オリジン間リソース共有の略
+** Origin = (ドメイン|プロトコル|ポート)
+* 追加のHTTPヘッダを用いて、あるオリジンで動いているWebアプリケーションが異なるオリジンのサーバのリソースにアクセスできるようにする仕組み。
+
+== アクセス制御シナリオの例
+
+=== 単純リクエスト
+
+==== 概要
+
+* 許可されるメソッド
+** GET
+** POST
+** HEAD
+* 許可されるContent-Typeヘッダ
+** application/x-www-form-urlencoded
+** multipart/form-data
+** text/plain
+
+==== 流れ
+
+* サーバ: `https://server.example`
+* クライアント: `https://client.example`
+
+. ブラウザから `Origin: https://server.example` を付けてリクエスト
+. サーバは `Access-Control-Allow-Origin: *` か `Access-Control-Allow-Origin: https://client.example` を付けてレスポンス
+** `Access-Control-Allow-Origin` はワイルドカードが認められている
+*** しかし、サブドメインなど部分的なワイルドカードは認められていない
+
+==== その他
+
+* ブラウザのXHRでは特に工夫することはないが、Fetch APIではオプションでCORSを宣言する。
+
+=== プリフライトリクエスト
+
+==== 概要
+
+* 初めにOPTIONSメソッドによるリクエストを送信して実際のリクエストを送ってもよいかを確かめる。
+
+いずれかが満たされるとプリフライトリクエストが用いられる。
+
+* 下記のメソッド
+** PUT
+** DELETE
+** OPTIONS
+** TRACE
+** PATCH
+
+* 下記以外のヘッダ
+** Accept
+** Accept-Language
+** Content-Language
+** Content-Type (但し、下記の要件を満たすもの)
+** DPR
+** Downlink
+** Save-Data
+** Viewport-Width
+** Width
+
+* 下記以外のContent-Typeヘッダ
+** application/x-www-form-urlencoded
+** multipart/form-data
+** text/plain
+
+==== 流れ
+
+. ブラウザから以下のヘッダーを追加してリクエスト
+----
+Origin: https://server.example
+Access-Control-Allow-Methods: <今後行うリクエストのHTTPメソッド>
+Access-Control-Allow-Header: <今後行うリクエストのHTTPヘッダー>
+----
+. サーバは以下のヘッダを付け加えてレスポンス
+** 単純リクエストで許可されないヘッダーをクライアントが読みたい場合は `Access-Control-Expose-Headers: <クライアントが読みたいヘッダー>` を付け加えないとブラウザがエラーを吐く
+----
+Access-Control-Allow-Origin: https://trustedsite.com
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Methods: 
+Access-Control-Allow-Headers: 
+----
+
+==== その他
+
+* `Access-Control-Allow-Methods` には `OPTIONS` も含まないといけない
+
+=== 資格情報を含むリクエスト
+
+==== 概要
+
+==== クライアント
+
+==== バックエンド
+
+== 参考サイト
+
+* https://qiita.com/tomoyukilabs/items/81698edd5812ff6acb34[CORSまとめ - Qiita]
+* https://developer.mozilla.org/ja/docs/Web/HTTP/CORS[オリジン間リソース共有 (CORS) - HTTP | MDN]
+* 
