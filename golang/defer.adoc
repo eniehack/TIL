@@ -1,0 +1,23 @@
+= defer
+
+[source, go]
+----
+func main() {
+    defer fmt.Println("defer")
+    fmt.Println("Hello World!")
+}
+----
+
+`defer` は渡した関数の実行をreturnまで遅延させる。
+すぐに評価はされるものの、実行は関数がreturnするまでされない。
+つまり、上のサンプルコードはコンパイルすると
+
+[source, bash]
+----
+Hello World!
+defer
+----
+
+と吐くはずである。
+
+複数のDefer文が同一の関数に存在する場合はLIFO(古いデータほど、長く残る)で実行される。
