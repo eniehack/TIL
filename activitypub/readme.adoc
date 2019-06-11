@@ -1,0 +1,1 @@
+今後の更新は https://github.com/eniehack/learn-activitypub/[新設したリポジトリ] で行なわれます。
