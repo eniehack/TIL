@@ -1,0 +1,49 @@
+= MIDIとは
+:author: Nakaya
+:Email: eniehack@outlook.jp
+:Date: 2019/08/04
+:Revision: 0.9
+
+== MIDIとは
+
+[quote, 'https://ja.wikipedia.org/wiki/MIDI[MIDI - Wikipedia]']
+----
+電子楽器の演奏データを機器間で転送・共有するための共通規格
+----
+
+* 物理的送受信回路、プロトコル、ファイルフォーマットを定義
+* 1981年にMIDI 1.0が策定
+* 2019年にMIDI 2.0策定開始
+
+=== 特徴
+
+* MIDIのデータは演奏方法を記述する方式
+* データ量が少ない
+* 劣化しない
+* 使える音色はMIDIコントローラに依存する
+
+== 用語
+
+.MIDIコントローラ
+MIDIに対応した電子楽器
+
+.RP
+拡張規格のこと
+
+.SMF
+* Standard MIDI Fileの略
+* 拡張子は `.mid`
+* RPのひとつ
+* バイナリファイル
+
+== ハードウェア
+
+* 送信には31.25Kbpsの非同期シリアル転送を用いる
+* 5ピンのDINコネクタを用いることが一般的
+** 
+
+== 参考文献
+
+* 「MIDI - Wikipedia」, <https://ja.wikipedia.org/wiki/MIDI>, (参照2019-08-04)
+* 藤本健 (2015)『今さら聞けない、「MIDIって何？」「MIDIって古いの？」 | | 藤本健の "DTMステーション"』, <https://www.dtmstation.com/archives/51930656.html>, (参照2019-08-04)
+* Incept Inc. (2017) 「MIDI（Musical Instrument Digital Interface）とは - IT用語辞典 e-Words」, <http://e-words.jp/w/MIDI.html>, (参照2019-08-04)
