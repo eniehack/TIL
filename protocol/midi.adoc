@@ -1,10 +1,10 @@
-= MIDIとは
+= MIDI
 :author: Nakaya
 :Email: eniehack@outlook.jp
 :Date: 2019/08/04
 :Revision: 0.9
 
-== MIDIとは
+== Overview
 
 [quote, 'https://ja.wikipedia.org/wiki/MIDI[MIDI - Wikipedia]']
 ----
@@ -36,14 +36,60 @@ MIDIに対応した電子楽器
 * RPのひとつ
 * バイナリファイル
 
+.MIDIメッセージ
+
+データの送受信方式
+
+.MIDIチャンネル
+
+最大16種類取ることができる
+
+.ノートオン/オフ
+
+鍵盤を押す/離すこと
+
 == ハードウェア
 
 * 送信には31.25Kbpsの非同期シリアル転送を用いる
 * 5ピンのDINコネクタを用いることが一般的
 ** 
 
+== MIDIメッセージ
+
+=== 概要
+
+NOTE: 実際は2進数のデータとして送信されるが、ここでは16進数として扱うこととする
+
+2つに大分される
+
+.チャンネルメッセージ
+複数パートを別々にコントロールするためのメッセージ
+
+.システムメッセージ
+MIDIシステム全体をコントロールするためのメッセージ
+
+また、MIDIメッセージは
+
+.ステータスバイト
+上1ケタfootnote:[MSBという]が"1"である0x80~0xFFで表現
+
+.データバイト
+MSBが"0"である0x00~0x7Fで表現
+
+の2つを用いて複数バイト footnote:[ステータス*1Byte+データ*2Byte=3Byte]を構成している。それぞれの上1ケタビットがその2つを区別。
+
+=== MIDIチャンネル
+
+* 前半4ケタはメッセージの種類
+* 後半4ケタはチャンネル番号
+
+を付ける。
+
+NOTE: チャンネルが16種類取れるのは4Bit(=16段階の値を取れる)だからである
+
 == 参考文献
 
 * 「MIDI - Wikipedia」, <https://ja.wikipedia.org/wiki/MIDI>, (参照2019-08-04)
 * 藤本健 (2015)『今さら聞けない、「MIDIって何？」「MIDIって古いの？」 | | 藤本健の "DTMステーション"』, <https://www.dtmstation.com/archives/51930656.html>, (参照2019-08-04)
 * Incept Inc. (2017) 「MIDI（Musical Instrument Digital Interface）とは - IT用語辞典 e-Words」, <http://e-words.jp/w/MIDI.html>, (参照2019-08-04)
+* Daiki.Kato-Direct Art Studio (2007) 「詳説MIDI規格」, <http://web.archive.org/web/20070614100027/http://www.pluto.dti.ne.jp/~daiki/Midi/AboutMidi_Msg.html>, (参照2019-08-04) 
